@@ -1,77 +1,74 @@
-" VIM Configuration File
-" Description: Optimized for C/C++ development, but useful also for other things.
-" Author: Gerhard Gappmeier
-"
+source $VIMRUNTIME/defaults.vim
 
-" set UTF-8 encoding
-set enc=utf-8
-set fenc=utf-8
-set termencoding=utf-8
-" disable vi compatibility (emulation of old bugs)
-set nocompatible
-" use indentation of previous line
-set autoindent
-" use intelligent indentation for C
-set smartindent
-" configure tabwidth and insert spaces instead of tabs
-set tabstop=4        " tab width is 4 spaces
-set shiftwidth=4     " indent also with 4 spaces
-set expandtab        " expand tabs to spaces
-" wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
-set textwidth=120
-" turn syntax highlighting on
-set t_Co=256
-syntax on
-" colorscheme wombat256
-" turn line numbers on
+set laststatus=2
 set number
-" highlight matching braces
-set showmatch
-" intelligent comments
-set comments=sl:/*,mb:\ *,elx:\ */
+set rnu
+set scrolloff=8
 
-" Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
-" This offers intelligent C++ completion when typing ‘.’ ‘->’ or <C-o>
-" Load standard tag files
-set tags+=~/.vim/tags/cpp
-set tags+=~/.vim/tags/gl
-set tags+=~/.vim/tags/sdl
-set tags+=~/.vim/tags/qt4
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+" this to add rnu in for the explre mode
+let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 
-" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
-let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
+" this for fzf plugin
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+"Plug 'ayu-theme/ayu-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
+Plug 'vim-syntastic/syntastic'
+Plug 'neoclide/coc.nvim', {'branch': 'release'},
+Plug 'preservim/nerdtree'
 
-" Enhanced keyboard mappings
-"
-" in normal mode F2 will save the file
-nmap <F2> :w<CR>
-" in insert mode F2 will exit insert, save, enters insert again
-imap <F2> <ESC>:w<CR>i
-" switch between header/source with F4
-map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
-" recreate tags file with F5
-map <F5> :!ctags -R –c++-kinds=+p –fields=+iaS –extra=+q .<CR>
-" create doxygen comment
-map <F6> :Dox<CR>
-" build using makeprg with <F7>
-map <F7> :make<CR>
-" build using makeprg with <S-F7>
-map <S-F7> :make clean all<CR>
-" goto definition with F12
-map <F12> <C-]>
-" in diff mode we use the spell check keys for merging
-if &diff
-  ” diff settings
-  map <M-Down> ]c
-  map <M-Up> [c
-  map <M-Left> do
-  map <M-Right> dp
-  map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
-else
-  " spell settings
-  :setlocal spell spelllang=en
-  " set the spellfile - folders must exist
-  set spellfile=~/.vim/spellfile.add
-  map <M-Down> ]s
-  map <M-Up> [s
-endif
+call plug#end()
+"This for coc config
+let g:coc_global_extensions = [
+    \ 'coc-pairs',
+    \ 'coc-tsserver',
+    \ 'coc-prettier',
+    \ 'coc-json',
+    \ 'coc-pyright',
+    \ 'coc-html',
+    \ 'coc-clangd',
+    \ ]
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" the getline color
+let g:lightline = {
+      \ 'colorscheme': 'dracula',
+      \ }
+
+set termguicolors     " enable true colors support
+colorscheme dracula
+
+" our maps
+let mapleader = " "
+nnoremap <leader><CR> :so ~/.vimrc<CR>
+nnoremap <leader>vv :Vex<CR>
+nnoremap <leader>ss :Sex<CR>
+nnoremap <leader>e :Ex<CR>
+nnoremap <leader>gf :GFiles<CR>
+nnoremap <leader>pf :Files<CR>
+nnoremap <leader>vt :vertical terminal<CR>
+nnoremap <leader>bt :botright terminal<CR>
+
+nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <space>o :NERDTreeToggle<CR>
+
+nnoremap <C-k> :cnext<CR>
+nnoremap <C-j> :cprev<CR>
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+nnoremap <leader>edv :e ~/.vimrc<CR>
+
+" The copy from to the clipboard
+:inoremap <C-v> <ESC>"+pa
+:vnoremap <leader>c "+y
+:vnoremap <leader>d "+d
+:nnoremap <leader>n :e
