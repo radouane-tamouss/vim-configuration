@@ -37,16 +37,16 @@ This repository provides a well-configured Vim setup designed to optimize your c
    git clone [https://github.com/your-username/your-vim-config.git](https://github.com/your-username/your-vim-config.git) ~/.vim
 
 2. **Install Requirements:**
-*macOS:
-     Use Homebrew, a popular package manager for macOS. Install the required dependencies with:
-     ```bash
-     brew install fzf ripgrep node
+macOS:
+   Use Homebrew, a popular package manager for macOS. Install the required dependencies with:
+   ```bash
+   brew install fzf ripgrep node
 
-*Ubuntu/Debian:
-
-    sudo apt install fzf ripgrep nodejs python3-pip
-    sudo apt install npm
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+Ubuntu/Debian:
+   ```bash
+   sudo apt install fzf ripgrep nodejs python3-pip
+   sudo apt install npm
+   curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 3. **Install Plugins (using vim-plug)**
    * Make sure you have the `vim-plug` plugin manager installed
