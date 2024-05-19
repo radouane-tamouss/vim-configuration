@@ -41,12 +41,10 @@ This repository provides a well-configured Vim setup designed to optimize your c
 *macOS:
   Use Homebrew, a popular package manager for macOS. Install the required dependencies with:
 
-      ```bash
       brew install fzf ripgrep node
       
   *Ubuntu/Debian:
   
-      ```bash
       sudo apt install fzf ripgrep nodejs python3-pip
       sudo apt install npm
       curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
