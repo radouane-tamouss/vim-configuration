@@ -34,7 +34,7 @@ This repository provides a well-configured Vim setup designed to optimize your c
 1. **Clone this repository:**
 
    ```bash
-   git clone [https://github.com/your-username/your-vim-config.git](https://github.com/your-username/your-vim-config.git) ~/.vim
+   git clone git@github.com:radouane-tamouss/vim-configuration.git ~/.vim
 
 2. **Install Requirements:**
 
